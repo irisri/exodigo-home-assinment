@@ -5,8 +5,10 @@
 }
 
 :root {
+  --gray-400: #e5e7eb;
   --gray-600: #9ca3af;
   --purple-800: #7e22ce;
+  --error: #dc2626;
 }
 
 body {

@@ -23,5 +23,5 @@ export type Cocktail = {
 };
 
 export type CocktailResponse = {
-  drinks: Cocktail[];
+  drinks: Cocktail[] | null;
 };

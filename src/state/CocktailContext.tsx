@@ -3,13 +3,15 @@ import { httpServices } from "../services/httpService";
 import { CocktailContextType } from "../types/context.ts";
 import { Cocktail } from "../types/cocktail.ts";
 import { storageService } from "../utils/util.ts";
-import { COCKTAIL_LIST_KEY } from "../utils/constent.ts";
+import { COCKTAIL_LIST_KEY } from "../utils/constant.ts";
 
 const CocktailContext = createContext<CocktailContextType>({
   searchInput: "",
   cocktails: [],
   setSearchInput: () => {},
   isLoading: false,
+  getCocktails: () => {},
+  error: "",
 });
 
 const CocktailProvider = ({ children }: { children: React.ReactNode }) => {
@@ -17,6 +19,7 @@ const CocktailProvider = ({ children }: { children: React.ReactNode }) => {
   const [debounceId, setDebounceId] = useState<number>();
   const [cocktails, setCocktails] = useState<Cocktail[]>([]);
   const [isLoading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const searchCocktails = async () => {
     const res = await httpServices.get(`search.php?s=${searchInput}`);
@@ -34,7 +37,9 @@ const CocktailProvider = ({ children }: { children: React.ReactNode }) => {
       setCocktails(cocktailList);
     } else {
       const cocktailList = await searchCocktails();
-      setCocktails(cocktailList);
+      if (cocktailList === null)
+        setError(`Sorry there is no ${searchInput} in the database`);
+      setCocktails(cocktailList ?? []);
     }
 
     setLoading(false);
@@ -47,7 +52,6 @@ const CocktailProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   useEffect(() => {
-    getCocktails(true);
     return clearTimeout(debounceId);
   }, []);
 
@@ -58,10 +62,12 @@ const CocktailProvider = ({ children }: { children: React.ReactNode }) => {
   return (
     <CocktailContext.Provider
       value={{
-        searchInput: searchInput,
+        searchInput,
         cocktails,
         setSearchInput,
         isLoading,
+        getCocktails,
+        error,
       }}
     >
       {children}

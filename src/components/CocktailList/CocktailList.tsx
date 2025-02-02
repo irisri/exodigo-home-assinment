@@ -1,10 +1,17 @@
-import { Cocktail } from "../../types/cocktail";
+import { useContext } from "react";
 import { CocktailItem } from "../CocktailItm/CocktailItem";
+import { SearchInput } from "../SearchInput/SearchInput";
 import "./style.css";
+import { CocktailContext } from "../../state/CocktailContext";
+import { Loader } from "../Loader/Loader";
 
-export const CocktailList = ({ cocktails }: { cocktails: Cocktail[] }) => {
+export const CocktailList = () => {
+  const { cocktails, isLoading } = useContext(CocktailContext);
+
   return (
     <>
+      <SearchInput />
+      <Loader isLoading={isLoading} />
       <div className="cocktail-list">
         {cocktails.length > 0 &&
           cocktails.map((cocktail) => {

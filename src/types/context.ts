@@ -5,4 +5,6 @@ export type CocktailContextType = {
   searchInput: string;
   setSearchInput: (value: string) => void;
   isLoading: boolean;
+  getCocktails: (value: boolean) => void;
+  error: string;
 };
