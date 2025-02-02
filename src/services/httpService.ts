@@ -1,4 +1,5 @@
 import Axios, { AxiosInstance, AxiosResponse } from "axios";
+import { CocktailResponse } from "../types/cocktail";
 
 class HttpServices {
   private axiosInstance: AxiosInstance;
@@ -9,7 +10,7 @@ class HttpServices {
     });
   }
 
-  get = async (path: string): Promise<AxiosResponse> => {
+  get = async (path: string): Promise<AxiosResponse<CocktailResponse>> => {
     return this.axiosInstance.get(path);
   };
 
