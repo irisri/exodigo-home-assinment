@@ -1,26 +1,15 @@
-import { useEffect, useState } from "react";
 import { Loader } from "../components/Loader/Loader";
 import { CocktailList } from "../components/CocktailList/CocktailList";
-import { httpServices } from "../services/httpService";
-import { Cocktail } from "../types/cocktail";
+import { CocktailContext, CocktailProvider } from "../state/CocktailContext";
+import { useContext } from "react";
 
 export const Main = () => {
-  const [cocktails, setCocktails] = useState<Cocktail[]>([]);
-  const [isLoading, setLoading] = useState(false);
+  const { isLoading, cocktails } = useContext(CocktailContext);
 
-  useEffect(() => {
-    const getCocktails = async () => {
-      const res = await httpServices.get("search.php?s=margarita");
-      setCocktails(res.data.drinks);
-    };
-    setLoading(true);
-    getCocktails();
-    setLoading(false);
-  }, []);
   return (
-    <>
+    <CocktailProvider>
       <Loader isLoading={isLoading} />
       <CocktailList cocktails={cocktails} />
-    </>
+    </CocktailProvider>
   );
 };
