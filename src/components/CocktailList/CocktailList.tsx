@@ -1,9 +1,9 @@
 import { useContext } from "react";
 import { CocktailItem } from "../CocktailItm/CocktailItem";
 import { SearchInput } from "../SearchInput/SearchInput";
-import "./style.css";
 import { CocktailContext } from "../../state/CocktailContext";
 import { Loader } from "../Loader/Loader";
+import "./style.css";
 
 export const CocktailList = () => {
   const { cocktails, isLoading } = useContext(CocktailContext);

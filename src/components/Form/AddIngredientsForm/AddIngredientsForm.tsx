@@ -1,5 +1,5 @@
 import { ChangeEvent, useState, MouseEvent } from "react";
-import { Ingredient } from "../../types/cocktail";
+import { Ingredient } from "../../../types/cocktail";
 
 interface AddIngredientsProps {
   ingredientList: Ingredient[];

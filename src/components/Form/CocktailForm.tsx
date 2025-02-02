@@ -4,9 +4,9 @@ import { getCocktailFromNew, storageService } from "../../utils/util";
 import { AddIngredientsForm } from "./AddIngredientsForm/AddIngredientsForm";
 import { AddTagsForm } from "./AddTagsForm/AddTagsForm";
 import { UploadFile } from "./UploadFile/UploadFile";
-import "./style.css";
 import { ADDed_COCKTAIL } from "../../utils/constant";
 import { useNavigate } from "react-router-dom";
+import "./style.css";
 
 export const CocktailForm = () => {
   let navigate = useNavigate();

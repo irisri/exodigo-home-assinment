@@ -1,8 +1,8 @@
 import { useMemo } from "react";
 import { Cocktail } from "../../types/cocktail";
-import "./style.css";
 import { Tag } from "../Tag/Tag";
 import { getIngredients } from "../../utils/util";
+import "./style.css";
 
 export const DetailCocktail = ({ cocktail }: { cocktail: Cocktail }) => {
   const ingredients = useMemo(() => {
