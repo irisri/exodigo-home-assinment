@@ -5,7 +5,6 @@ import "./style.css";
 export const CocktailList = ({ cocktails }: { cocktails: Cocktail[] }) => {
   return (
     <>
-      <h1>The cocktail DB</h1>
       <div className="cocktail-list">
         {cocktails.length > 0 &&
           cocktails.map((cocktail) => {

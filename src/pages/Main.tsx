@@ -3,7 +3,6 @@ import { Loader } from "../components/Loader/Loader";
 import { CocktailList } from "../components/CocktailList/CocktailList";
 import { httpServices } from "../services/httpService";
 import { Cocktail } from "../types/cocktail";
-import { Container } from "../components/Container/container";
 
 export const Main = () => {
   const [cocktails, setCocktails] = useState<Cocktail[]>([]);
@@ -19,9 +18,9 @@ export const Main = () => {
     setLoading(false);
   }, []);
   return (
-    <Container>
+    <>
       <Loader isLoading={isLoading} />
       <CocktailList cocktails={cocktails} />
-    </Container>
+    </>
   );
 };
