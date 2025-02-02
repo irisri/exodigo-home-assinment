@@ -3,20 +3,24 @@ import { useParams } from "react-router-dom";
 import { Cocktail } from "../types/cocktail";
 import { httpServices } from "../services/httpService";
 import { Loader } from "../components/Loader/Loader";
+import { DetailCocktail } from "../components/DetailCocktail/DetailCocktail";
 
 export const Details = () => {
   const { id } = useParams();
 
-  const [cocktail, setCocktail] = useState<Cocktail>();
+  const [cocktail, setCocktail] = useState<Cocktail>({} as Cocktail);
   const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
     if (!id) return;
 
     const getCocktail = async () => {
-      const res = await httpServices.get("lookup.php?i=${id}");
+      const res = await httpServices.get(`lookup.php?i=${id}`);
+      const cocktail = res.data.drinks
+        ? (res.data.drinks[0] as Cocktail)
+        : ({} as Cocktail);
 
-      setCocktail(res.data.drinks[0] as Cocktail);
+      setCocktail(cocktail);
     };
     setLoading(true);
     getCocktail();
@@ -26,11 +30,7 @@ export const Details = () => {
   return (
     <>
       <Loader isLoading={isLoading} />
-      {cocktail ? (
-        <div>
-          <h2>{cocktail.strDrink}</h2>
-        </div>
-      ) : null}
+      {cocktail ? <DetailCocktail cocktail={cocktail} /> : null}
     </>
   );
 };

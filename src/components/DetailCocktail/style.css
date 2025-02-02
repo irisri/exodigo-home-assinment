@@ -1,0 +1,34 @@
+.detail-cocktail-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.detail-cocktail-container h2 {
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.detail-cocktail-container img {
+  border-radius: 4px;
+  margin: 30px auto;
+  width: 500px;
+  height: 500px;
+}
+
+.detail-cocktail-ingredient-container {
+  margin-top: 16px;
+}
+
+.detail-cocktail-ingredient-container h3 {
+  margin-bottom: 4px;
+  font-size: 20px;
+}
+
+.detail-cocktail-tag-container {
+  margin-top: 20px;
+  display: flex;
+  gap: 4px;
+}

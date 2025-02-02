@@ -23,5 +23,10 @@ export type Cocktail = {
 };
 
 export type CocktailResponse = {
-  drinks: Cocktail[] | null;
+  drinks: Cocktail[] | null | undefined;
+};
+
+export type Ingredient = {
+  ingredient: string;
+  measurement: string;
 };
