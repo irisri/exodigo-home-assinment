@@ -96,42 +96,48 @@ export const CocktailForm = () => {
 
       <div className="form-field-container">
         <p>Drink type:</p>
-        <select
-          required
-          value={cocktailAlcoholic}
-          onSelect={(event: ChangeEvent<HTMLSelectElement>) =>
-            setCocktailAlcoholic(event.target.value as Cocktail["strAlcoholic"])
-          }
-        >
-          <option value={"Non alcoholic" as Cocktail["strAlcoholic"]}>
-            Non alcoholic
-          </option>
-          <option value={"Alcoholic" as Cocktail["strAlcoholic"]}>
-            Alcoholic
-          </option>
-        </select>
+        <div className="select-container">
+          <select
+            required
+            value={cocktailAlcoholic}
+            onSelect={(event: ChangeEvent<HTMLSelectElement>) =>
+              setCocktailAlcoholic(
+                event.target.value as Cocktail["strAlcoholic"]
+              )
+            }
+          >
+            <option value={"Non alcoholic" as Cocktail["strAlcoholic"]}>
+              Non alcoholic
+            </option>
+            <option value={"Alcoholic" as Cocktail["strAlcoholic"]}>
+              Alcoholic
+            </option>
+          </select>
+        </div>
       </div>
 
       <div className="form-field-container">
         <p>Category:</p>
-        <select
-          required
-          value={cocktailCategory}
-          onSelect={(event: ChangeEvent<HTMLSelectElement>) =>
-            setCocktailCategory(event.target.value as Cocktail["strCategory"])
-          }
-        >
-          <option value={"Ordinary Drink" as Cocktail["strCategory"]}>
-            Ordinary Drink
-          </option>
-          <option value={"Cocktail" as Cocktail["strCategory"]}>
-            Cocktail
-          </option>
-          <option value={"Other / Unknown" as Cocktail["strCategory"]}>
-            Other / Unknown
-          </option>
-          <option value={"Shot" as Cocktail["strCategory"]}>Shot</option>
-        </select>
+        <div className="select-container">
+          <select
+            required
+            value={cocktailCategory}
+            onSelect={(event: ChangeEvent<HTMLSelectElement>) =>
+              setCocktailCategory(event.target.value as Cocktail["strCategory"])
+            }
+          >
+            <option value={"Ordinary Drink" as Cocktail["strCategory"]}>
+              Ordinary Drink
+            </option>
+            <option value={"Cocktail" as Cocktail["strCategory"]}>
+              Cocktail
+            </option>
+            <option value={"Other / Unknown" as Cocktail["strCategory"]}>
+              Other / Unknown
+            </option>
+            <option value={"Shot" as Cocktail["strCategory"]}>Shot</option>
+          </select>
+        </div>
       </div>
 
       <div className="form-field-container">

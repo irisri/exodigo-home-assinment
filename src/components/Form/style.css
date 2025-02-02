@@ -19,3 +19,9 @@ form .submit-button {
 .form-field-container p {
   font-size: 16px;
 }
+
+.select-container {
+  background-color: var(--gray-400);
+  border-radius: 4px;
+  padding-right: 4px;
+}
