@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Main } from "./pages/Main";
 import { Details } from "./pages/Details";
 import { Layout } from "./components/Layout/Layout";
+import { New } from "./pages/New";
 
 library.add(far, fas);
 
@@ -15,6 +16,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route path="" element={<Main />} />
+            <Route path="new" element={<New />} />
             <Route path="details/:id" element={<Details />} />
           </Route>
         </Routes>

@@ -31,7 +31,7 @@ export const DetailCocktail = ({ cocktail }: { cocktail: Cocktail }) => {
           </h3>
           {ingredients.map((ingredient) => {
             return (
-              <p key={ingredient.ingredient}>
+              <p key={`${ingredient.ingredient}-${ingredient.measurement}`}>
                 {ingredient.measurement} {ingredient.ingredient}
               </p>
             );

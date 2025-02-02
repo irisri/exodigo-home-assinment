@@ -37,7 +37,7 @@ a:active {
   color: inherit;
 }
 
-input {
+input[type="text"] {
   border: none;
   outline: none;
   background-color: var(--gray-400);
@@ -46,4 +46,34 @@ input {
   font-size: 16px;
   border-radius: 4px;
   padding: 8px 4px;
+}
+
+select {
+  background-color: var(--gray-400);
+  border: none;
+  outline: none;
+  font-family: "Afacad Flux", serif;
+  padding: 8px 4px;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+textarea {
+  border: none;
+  outline: none;
+  background-color: var(--gray-400);
+  font-family: "Afacad Flux", serif;
+  width: 100%;
+  border-radius: 4px;
+  padding: 8px 4px;
+}
+
+button {
+  border: none;
+  outline: none;
+  background-color: var(--gray-400);
+  font-family: "Afacad Flux", serif;
+  border-radius: 4px;
+  padding: 8px 4px;
+  border: 1px solid var(--gray-1000);
 }

@@ -30,3 +30,19 @@ export type Ingredient = {
   ingredient: string;
   measurement: string;
 };
+
+export interface GetCocktailFromNewProps {
+  cocktailName: string;
+  ingredientList: Ingredient[];
+  instructions: string;
+  cocktailAlcoholic: Cocktail["strAlcoholic"];
+  cocktailGlass: string;
+  cocktailCategory: Cocktail["strCategory"];
+  tags?: string[];
+  img: string | null;
+}
+
+export type NewCocktailPayloadType = Omit<
+  Cocktail,
+  "idDrink" | "strIBA" | "strDrinkThumb" | "strImageSource"
+>;

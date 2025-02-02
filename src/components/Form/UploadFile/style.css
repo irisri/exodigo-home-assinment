@@ -1,0 +1,20 @@
+.file-upload-container {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.file-upload-input-container {
+  border: none;
+  outline: none;
+  background-color: var(--gray-400);
+  font-family: "Afacad Flux", serif;
+  border-radius: 4px;
+  padding: 8px;
+  border: 1px solid var(--gray-1000);
+  cursor: pointer;
+}
+
+.file-upload-input-container input[type="file"] {
+  display: none;
+}

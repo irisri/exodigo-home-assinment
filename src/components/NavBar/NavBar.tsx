@@ -7,6 +7,8 @@ export const NavBar = () => {
       <NavLink to="/">
         <h1>The cocktail DB</h1>
       </NavLink>
+
+      <NavLink to="/new">Add new cocktail</NavLink>
     </div>
   );
 };
