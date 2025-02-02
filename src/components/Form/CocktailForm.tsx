@@ -1,12 +1,16 @@
 import { useState, ChangeEvent } from "react";
 import { Cocktail, Ingredient } from "../../types/cocktail";
-import { getCocktailFromNew } from "../../utils/util";
+import { getCocktailFromNew, storageService } from "../../utils/util";
 import { AddIngredientsForm } from "./AddIngredientsForm/AddIngredientsForm";
 import { AddTagsForm } from "./AddTagsForm/AddTagsForm";
 import { UploadFile } from "./UploadFile/UploadFile";
 import "./style.css";
+import { ADDed_COCKTAIL } from "../../utils/constant";
+import { useNavigate } from "react-router-dom";
 
 export const CocktailForm = () => {
+  let navigate = useNavigate();
+
   const [cocktailName, setCocktailName] = useState("");
   const [cocktailCategory, setCocktailCategory] =
     useState<Cocktail["strCategory"]>();
@@ -19,7 +23,7 @@ export const CocktailForm = () => {
   const [img, setImg] = useState("");
   const [error, setError] = useState("");
 
-  const onSubmit = () => {
+  const onSubmit = async () => {
     if (ingredientList.length === 0) {
       setError("Please add at least 1 ingredient");
       return;
@@ -35,6 +39,11 @@ export const CocktailForm = () => {
       return;
     }
 
+    if (img.length === 0) {
+      setError("Please add drink image");
+      return;
+    }
+
     const cocktail = getCocktailFromNew({
       cocktailAlcoholic,
       cocktailCategory,
@@ -45,6 +54,18 @@ export const CocktailForm = () => {
       instructions,
       img,
     });
+
+    const addedCocktailsString = storageService.get(ADDed_COCKTAIL);
+    const addedCocktails = addedCocktailsString
+      ? (JSON.parse(addedCocktailsString) as Cocktail[])
+      : ([] as Cocktail[]);
+
+    storageService.set(
+      ADDed_COCKTAIL,
+      JSON.stringify([...addedCocktails, cocktail])
+    );
+
+    await navigate("/");
   };
 
   return (

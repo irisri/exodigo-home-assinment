@@ -3,7 +3,7 @@ import { httpServices } from "../services/httpService";
 import { CocktailContextType } from "../types/context.ts";
 import { Cocktail } from "../types/cocktail.ts";
 import { storageService } from "../utils/util.ts";
-import { COCKTAIL_LIST_KEY } from "../utils/constant.ts";
+import { ADDed_COCKTAIL, COCKTAIL_LIST_KEY } from "../utils/constant.ts";
 
 const CocktailContext = createContext<CocktailContextType>({
   searchInput: "",
@@ -29,19 +29,37 @@ const CocktailProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   const getCocktails = async (shouldCheckStorage: boolean) => {
+    const cocktailList: Cocktail[] = [];
     setLoading(true);
 
-    const storage = storageService.get(COCKTAIL_LIST_KEY);
-    if (shouldCheckStorage && !!storage && JSON.parse(storage).length > 0) {
-      const cocktailList = JSON.parse(storage) as Cocktail[];
-      setCocktails(cocktailList);
+    const cocktailsStorage = storageService.get(COCKTAIL_LIST_KEY);
+    const addedCocktailsString = storageService.get(ADDed_COCKTAIL);
+
+    const addedCocktailsArray = addedCocktailsString
+      ? (JSON.parse(addedCocktailsString) as Cocktail[])
+      : ([] as Cocktail[]);
+
+    if (
+      shouldCheckStorage &&
+      !!cocktailsStorage &&
+      JSON.parse(cocktailsStorage).length > 0
+    ) {
+      cocktailList.push(...(JSON.parse(cocktailsStorage) as Cocktail[]));
     } else {
-      const cocktailList = await searchCocktails();
-      if (cocktailList === null)
+      const res = await searchCocktails();
+      if (res === null)
         setError(`Sorry there is no ${searchInput} in the database`);
-      setCocktails(cocktailList ?? []);
+
+      cocktailList.push(...(res ?? []));
     }
 
+    const newCocktails = [
+      ...cocktailList,
+      ...addedCocktailsArray.filter((cocktail) =>
+        cocktail.strDrink.includes(searchInput)
+      ),
+    ] as Cocktail[];
+    setCocktails(newCocktails);
     setLoading(false);
   };
 

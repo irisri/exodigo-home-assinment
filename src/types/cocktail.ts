@@ -44,5 +44,5 @@ export interface GetCocktailFromNewProps {
 
 export type NewCocktailPayloadType = Omit<
   Cocktail,
-  "idDrink" | "strIBA" | "strDrinkThumb" | "strImageSource"
+  "strIBA" | "strDrinkThumb" | "strImageSource"
 >;

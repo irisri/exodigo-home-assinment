@@ -13,6 +13,7 @@
   padding: 8px;
   border: 1px solid var(--gray-1000);
   cursor: pointer;
+  font-size: 14px;
 }
 
 .file-upload-input-container input[type="file"] {
