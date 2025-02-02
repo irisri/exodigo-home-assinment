@@ -1,5 +1,4 @@
-import { Suspense, useEffect, useState } from "react";
-
+import { useEffect, useState } from "react";
 import { Loader } from "../components/Loader/Loader";
 import { CocktailList } from "../components/CocktailList/CocktailList";
 import { httpServices } from "../services/httpService";
@@ -12,7 +11,7 @@ export const Main = () => {
 
   useEffect(() => {
     const getCocktails = async () => {
-      const res = await httpServices.get("?s=margarita");
+      const res = await httpServices.get("search.php?s=margarita");
       setCocktails(res.data.drinks);
     };
     setLoading(true);
@@ -21,8 +20,8 @@ export const Main = () => {
   }, []);
   return (
     <Container>
-      <CocktailList cocktails={cocktails} />
       <Loader isLoading={isLoading} />
+      <CocktailList cocktails={cocktails} />
     </Container>
   );
 };

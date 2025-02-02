@@ -8,7 +8,7 @@ export default defineConfig({
     cors: true,
     proxy: {
       "/api": {
-        target: "https://www.thecocktaildb.com/api/json/v1/1/search.php",
+        target: "https://www.thecocktaildb.com/api/json/v1/1/",
         changeOrigin: true,
         secure: false,
         rewrite: (path) => path.replace(/^\/api/, ""),
