@@ -24,6 +24,8 @@ export const AddIngredientsForm = ({
       setError("You have 15 ingredients, you can't add more");
       return;
     }
+    setIngredient("");
+    setMeasure("");
     onAddIngredientList({ ingredient, measurement: measure });
   };
 

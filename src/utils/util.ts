@@ -6,6 +6,7 @@ import {
   StrIngredient,
   StrMeasure,
 } from "../types/cocktail";
+import { v4 as uuidv4 } from "uuid";
 
 const setStorage = (key: string, data: string) =>
   localStorage.setItem(key, data);
@@ -61,7 +62,7 @@ export const getCocktailFromNew = ({
   );
 
   return {
-    idDrink: randomId(),
+    idDrink: uuidv4(),
     strAlcoholic: cocktailAlcoholic,
     strCategory: cocktailCategory,
     strDrink: cocktailName,
@@ -72,11 +73,4 @@ export const getCocktailFromNew = ({
     strImageAttribution: "",
     ...measureAndIngredientObject,
   } as NewCocktailPayloadType;
-};
-
-export const randomId = () => {
-  return Math.random()
-    .toString(36)
-    .replace(/[^a-z]+/g, "")
-    .substr(2, 10);
 };

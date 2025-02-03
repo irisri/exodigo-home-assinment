@@ -1,0 +1,6 @@
+.toast {
+  border: none;
+  padding: 8px;
+  min-height: fit-content;
+  font-family: "Afacad Flux", serif;
+}

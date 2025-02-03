@@ -1,4 +1,4 @@
-import { useState, ChangeEvent } from "react";
+import { useState, ChangeEvent, FormEventHandler, FormEvent } from "react";
 import { Cocktail, Ingredient } from "../../types/cocktail";
 import { getCocktailFromNew, storageService } from "../../utils/util";
 import { AddIngredientsForm } from "./AddIngredientsForm/AddIngredientsForm";
@@ -7,40 +7,42 @@ import { UploadFile } from "./UploadFile/UploadFile";
 import { ADDed_COCKTAIL } from "../../utils/constant";
 import { useNavigate } from "react-router-dom";
 import "./style.css";
+import { toast } from "react-toastify";
 
 export const CocktailForm = () => {
   let navigate = useNavigate();
 
   const [cocktailName, setCocktailName] = useState("");
   const [cocktailCategory, setCocktailCategory] =
-    useState<Cocktail["strCategory"]>();
+    useState<Cocktail["strCategory"]>("Ordinary Drink");
   const [cocktailAlcoholic, setCocktailAlcoholic] =
-    useState<Cocktail["strAlcoholic"]>();
+    useState<Cocktail["strAlcoholic"]>("Non alcoholic");
   const [cocktailGlass, setCocktailGlass] = useState("");
   const [tags, setTags] = useState<string[]>([]);
   const [ingredientList, setIngredientList] = useState<Ingredient[]>([]);
   const [instructions, setInstructions] = useState("");
   const [img, setImg] = useState("");
-  const [error, setError] = useState("");
 
-  const onSubmit = async () => {
+  const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
     if (ingredientList.length === 0) {
-      setError("Please add at least 1 ingredient");
+      toast.error("Please add at least 1 ingredient");
       return;
     }
 
     if (!cocktailAlcoholic) {
-      setError("Please add drink type");
+      toast.error("Please add drink type");
       return;
     }
 
     if (!cocktailCategory) {
-      setError("Please add drink category");
+      toast.error("Please add drink category");
       return;
     }
 
     if (img.length === 0) {
-      setError("Please add drink image");
+      toast.error("Please add drink image");
       return;
     }
 
@@ -65,11 +67,13 @@ export const CocktailForm = () => {
       JSON.stringify([...addedCocktails, cocktail])
     );
 
+    toast.success("You added a drink to the database!");
+
     await navigate("/");
   };
 
   return (
-    <form>
+    <form onSubmit={onSubmit}>
       <div className="form-field-container">
         <p>Cocktail name:</p>
         <input
@@ -100,18 +104,14 @@ export const CocktailForm = () => {
           <select
             required
             value={cocktailAlcoholic}
-            onSelect={(event: ChangeEvent<HTMLSelectElement>) =>
+            onChange={(event: ChangeEvent<HTMLSelectElement>) => {
               setCocktailAlcoholic(
                 event.target.value as Cocktail["strAlcoholic"]
-              )
-            }
+              );
+            }}
           >
-            <option value={"Non alcoholic" as Cocktail["strAlcoholic"]}>
-              Non alcoholic
-            </option>
-            <option value={"Alcoholic" as Cocktail["strAlcoholic"]}>
-              Alcoholic
-            </option>
+            <option value={"Non alcoholic"}>Non alcoholic</option>
+            <option value={"Alcoholic"}>Alcoholic</option>
           </select>
         </div>
       </div>
@@ -122,9 +122,11 @@ export const CocktailForm = () => {
           <select
             required
             value={cocktailCategory}
-            onSelect={(event: ChangeEvent<HTMLSelectElement>) =>
-              setCocktailCategory(event.target.value as Cocktail["strCategory"])
-            }
+            onChange={(event: ChangeEvent<HTMLSelectElement>) => {
+              setCocktailCategory(
+                event.target.value as Cocktail["strCategory"]
+              );
+            }}
           >
             <option value={"Ordinary Drink" as Cocktail["strCategory"]}>
               Ordinary Drink
@@ -169,13 +171,9 @@ export const CocktailForm = () => {
         />
       </div>
 
-      <UploadFile setError={setError} setImg={setImg} />
+      <UploadFile setImg={setImg} />
 
-      {error.length > 0 && <p className="error">{error}</p>}
-
-      <button className="submit-button" onSubmit={onSubmit}>
-        Submit cocktail
-      </button>
+      <button className="submit-button">Submit cocktail</button>
     </form>
   );
 };

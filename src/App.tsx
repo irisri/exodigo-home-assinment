@@ -6,6 +6,7 @@ import { Main } from "./pages/Main";
 import { Details } from "./pages/Details";
 import { Layout } from "./components/Layout/Layout";
 import { New } from "./pages/New";
+import { Toast } from "./components/Toast/Toast";
 
 library.add(far, fas);
 
@@ -21,6 +22,7 @@ function App() {
           </Route>
         </Routes>
       </BrowserRouter>
+      <Toast />
     </>
   );
 }

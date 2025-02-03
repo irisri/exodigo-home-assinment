@@ -1,5 +1,6 @@
 import { ChangeEvent, useState } from "react";
 import "./style.css";
+import { toast } from "react-toastify";
 
 interface UploadFileProps {
   setError: (value: string) => void;
@@ -11,7 +12,7 @@ export const UploadFile = ({ setError, setImg }: UploadFileProps) => {
   const onUpload = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files ? event.target.files[0] : null;
     if (!file) {
-      setError("This is not a file");
+      toast.error("This is not a file");
       return;
     }
 

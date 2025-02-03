@@ -11,7 +11,7 @@ type NumberPalette = {
   1000: string;
 };
 
-const grayPllater: NumberPalette = {
+const grayPalette: NumberPalette = {
   100: "#FFFFFF",
   200: "#F9FAFB",
   300: "#F3F4F6",
@@ -77,7 +77,7 @@ const PurplePalette: NumberPalette = {
 };
 
 const paletteNames = {
-  Gray: grayPllater,
+  Gray: grayPalette,
   Red: redPalette,
   Green: greenPalette,
   Yellow: yellowPalette,
@@ -97,7 +97,7 @@ const getColor = (color: Color): string => {
 
 const getAllColors = (): string[] => {
   return [
-    ...Object.values(grayPllater),
+    ...Object.values(grayPalette),
     ...Object.values(redPalette),
     ...Object.values(yellowPalette),
     ...Object.values(greenPalette),

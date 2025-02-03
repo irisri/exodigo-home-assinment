@@ -5,10 +5,14 @@
 }
 
 :root {
+  --gray-100: #fff;
   --gray-400: #e5e7eb;
   --gray-600: #9ca3af;
   --purple-800: #7e22ce;
   --error: #dc2626;
+  --toastify-toast-padding: 8px;
+  --toastify-toast-min-height: fit-content;
+  --toastify-font-family: "Afacad Flux", serif;
 }
 
 body {
@@ -78,4 +82,5 @@ button {
   padding: 8px 4px;
   border: 1px solid var(--gray-1000);
   font-size: 14px;
+  cursor: pointer;
 }
