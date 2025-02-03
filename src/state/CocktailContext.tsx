@@ -48,7 +48,7 @@ const CocktailProvider = ({ children }: { children: React.ReactNode }) => {
     } else {
       const res = await searchCocktails();
       if (res === null)
-        setError(`Sorry there is no ${searchInput} in the database`);
+        setError(`Sorry there is no '${searchInput}' in the database`);
 
       cocktailList.push(...(res ?? []));
     }
