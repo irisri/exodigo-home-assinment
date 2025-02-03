@@ -1,4 +1,4 @@
-import { useState, ChangeEvent, FormEventHandler, FormEvent } from "react";
+import { useState, ChangeEvent, FormEvent } from "react";
 import { Cocktail, Ingredient } from "../../types/cocktail";
 import { getCocktailFromNew, storageService } from "../../utils/util";
 import { AddIngredientsForm } from "./AddIngredientsForm/AddIngredientsForm";
