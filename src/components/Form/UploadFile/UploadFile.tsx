@@ -3,11 +3,10 @@ import "./style.css";
 import { toast } from "react-toastify";
 
 interface UploadFileProps {
-  setError: (value: string) => void;
   setImg: (value: string) => void;
 }
 
-export const UploadFile = ({ setError, setImg }: UploadFileProps) => {
+export const UploadFile = ({ setImg }: UploadFileProps) => {
   const [fileName, setFileName] = useState("");
   const onUpload = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files ? event.target.files[0] : null;
