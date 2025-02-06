@@ -4,9 +4,10 @@ import { toast } from "react-toastify";
 
 interface UploadFileProps {
   setImg: (value: string) => void;
+  img: string;
 }
 
-export const UploadFile = ({ setImg }: UploadFileProps) => {
+export const UploadFile = ({ setImg, img }: UploadFileProps) => {
   const [fileName, setFileName] = useState("");
   const onUpload = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files ? event.target.files[0] : null;
@@ -26,11 +27,15 @@ export const UploadFile = ({ setImg }: UploadFileProps) => {
 
   return (
     <div className="file-upload-container">
-      <label className="file-upload-input-container">
-        <input type="file" onChange={onUpload} />
-        Upload file
-      </label>
-      <p>{fileName}</p>
+      <div className="file-upload-input-data-container">
+        <label className="file-upload-input-container">
+          <input type="file" onChange={onUpload} />
+          Upload file
+        </label>
+        <p>{fileName}</p>
+      </div>
+
+      {img.length > 0 && <img src={img} />}
     </div>
   );
 };

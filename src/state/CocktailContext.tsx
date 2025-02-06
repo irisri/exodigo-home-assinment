@@ -24,6 +24,7 @@ const CocktailProvider = ({ children }: { children: React.ReactNode }) => {
   const searchCocktails = async () => {
     const res = await httpServices.get(`search.php?s=${searchInput}`);
     const data = res.data.drinks;
+    if (!Array.isArray(res.data.drinks)) return null;
     storageService.set(COCKTAIL_LIST_KEY, JSON.stringify(data));
     return data;
   };
@@ -55,9 +56,11 @@ const CocktailProvider = ({ children }: { children: React.ReactNode }) => {
 
     const newCocktails = [
       ...cocktailList,
-      ...addedCocktailsArray.filter((cocktail) =>
-        cocktail.strDrink.includes(searchInput)
-      ),
+      ...addedCocktailsArray.filter((cocktail) => {
+        if (searchInput.length === 0) return false;
+
+        cocktail.strDrink.includes(searchInput);
+      }),
     ] as Cocktail[];
     setCocktails(newCocktails);
     setLoading(false);

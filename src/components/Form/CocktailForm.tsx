@@ -145,9 +145,13 @@ export const CocktailForm = () => {
       <div className="form-field-container">
         <AddTagsForm
           tags={tags}
-          onAddTags={(tag: string) =>
-            setTags((prevState) => [...prevState, tag])
-          }
+          onAddTags={(tag: string) => {
+            if (tags.includes(tag)) {
+              toast.error("You have this tag already");
+              return;
+            }
+            setTags((prevState) => [...prevState, tag]);
+          }}
         />
       </div>
 
@@ -171,7 +175,7 @@ export const CocktailForm = () => {
         />
       </div>
 
-      <UploadFile setImg={setImg} />
+      <UploadFile setImg={setImg} img={img} />
 
       <button className="submit-button">Submit cocktail</button>
     </form>

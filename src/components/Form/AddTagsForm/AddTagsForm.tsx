@@ -1,6 +1,7 @@
 import { ChangeEvent, MouseEvent, useState } from "react";
 import { Tag } from "../../Tag/Tag";
 import "./style.css";
+import { toast } from "react-toastify";
 
 interface AddTagsProps {
   tags: string[];
@@ -11,6 +12,10 @@ export const AddTagsForm = ({ tags, onAddTags }: AddTagsProps) => {
   const [tag, setTag] = useState<string>("");
 
   const OnAddTag = (event: MouseEvent<HTMLButtonElement>) => {
+    if (!tag) {
+      toast.error("You didn't add a tag");
+      return;
+    }
     event.stopPropagation();
     onAddTags(tag);
     setTag("");
@@ -31,8 +36,8 @@ export const AddTagsForm = ({ tags, onAddTags }: AddTagsProps) => {
       </button>
 
       <div className="add-tag-container">
-        {tags.map((tag) => (
-          <Tag key={tag} text={tag} />
+        {tags.map((tag, index) => (
+          <Tag key={`${tag}-${index}`} text={tag} />
         ))}
       </div>
     </div>

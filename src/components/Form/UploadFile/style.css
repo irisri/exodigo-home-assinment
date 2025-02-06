@@ -1,5 +1,12 @@
 .file-upload-container {
   display: flex;
+  align-items: start;
+  gap: 8px;
+  flex-direction: column;
+}
+
+.file-upload-input-data-container {
+  display: flex;
   gap: 8px;
   align-items: center;
 }
@@ -18,4 +25,10 @@
 
 .file-upload-input-container input[type="file"] {
   display: none;
+}
+
+.file-upload-container img {
+  border-radius: 4px;
+  width: 100px;
+  height: 100px;
 }
