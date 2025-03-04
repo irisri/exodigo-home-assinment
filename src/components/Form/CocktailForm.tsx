@@ -1,10 +1,10 @@
 import { useState, ChangeEvent, FormEvent } from "react";
 import { Cocktail, Ingredient } from "../../types/cocktail";
-import { getCocktailFromNew, storageService } from "../../utils/util";
+import { getCocktailFromNew, localStorageService } from "../../utils/util";
 import { AddIngredientsForm } from "./AddIngredientsForm/AddIngredientsForm";
 import { AddTagsForm } from "./AddTagsForm/AddTagsForm";
 import { UploadFile } from "./UploadFile/UploadFile";
-import { ADDed_COCKTAIL } from "../../utils/constant";
+import { ADDED_COCKTAIL } from "../../utils/constant";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "./style.css";
@@ -57,13 +57,13 @@ export const CocktailForm = () => {
       img,
     });
 
-    const addedCocktailsString = storageService.get(ADDed_COCKTAIL);
+    const addedCocktailsString = localStorageService.get(ADDED_COCKTAIL);
     const addedCocktails = addedCocktailsString
       ? (JSON.parse(addedCocktailsString) as Cocktail[])
       : ([] as Cocktail[]);
 
-    storageService.set(
-      ADDed_COCKTAIL,
+    localStorageService.set(
+      ADDED_COCKTAIL,
       JSON.stringify([...addedCocktails, cocktail])
     );
 

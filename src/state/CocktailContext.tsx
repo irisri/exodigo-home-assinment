@@ -2,8 +2,8 @@ import React, { useState, createContext, useEffect } from "react";
 import { httpServices } from "../services/httpService";
 import { CocktailContextType } from "../types/context.ts";
 import { Cocktail } from "../types/cocktail.ts";
-import { storageService } from "../utils/util.ts";
-import { ADDed_COCKTAIL, COCKTAIL_LIST_KEY } from "../utils/constant.ts";
+import { localStorageService } from "../utils/util.ts";
+import { ADDED_COCKTAIL, COCKTAIL_LIST_KEY } from "../utils/constant.ts";
 
 const CocktailContext = createContext<CocktailContextType>({
   searchInput: "",
@@ -25,7 +25,7 @@ const CocktailProvider = ({ children }: { children: React.ReactNode }) => {
     const res = await httpServices.get(`search.php?s=${searchInput}`);
     const data = res.data.drinks;
     if (!Array.isArray(res.data.drinks)) return null;
-    storageService.set(COCKTAIL_LIST_KEY, JSON.stringify(data));
+    localStorageService.set(COCKTAIL_LIST_KEY, JSON.stringify(data));
     return data;
   };
 
@@ -33,8 +33,8 @@ const CocktailProvider = ({ children }: { children: React.ReactNode }) => {
     const cocktailList: Cocktail[] = [];
     setLoading(true);
 
-    const cocktailsStorage = storageService.get(COCKTAIL_LIST_KEY);
-    const addedCocktailsString = storageService.get(ADDed_COCKTAIL);
+    const cocktailsStorage = localStorageService.get(COCKTAIL_LIST_KEY);
+    const addedCocktailsString = localStorageService.get(ADDED_COCKTAIL);
 
     const addedCocktailsArray = addedCocktailsString
       ? (JSON.parse(addedCocktailsString) as Cocktail[])

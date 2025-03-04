@@ -13,7 +13,7 @@ const setStorage = (key: string, data: string) =>
 
 const getStorage = (key: string) => localStorage.getItem(key);
 
-export const storageService = {
+export const localStorageService = {
   get: getStorage,
   set: setStorage,
 };
